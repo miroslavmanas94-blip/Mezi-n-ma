@@ -1,1 +1,259 @@
-<placeholder>
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="theme-color" content="#4a0e1f"/>
+<title>Mezi námi</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--wine:#4a0e1f;--red:#9b2335;--pink:#d4a5a5;--cream:#faf6f1;--dark:#1a0a0f;--gold:#c9a227;--radius:18px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:linear-gradient(160deg,#1a0a0f 0%,#4a0e1f 50%,#2a0a15 100%);color:var(--cream);min-height:100dvh;line-height:1.5}
+h1,.logo{font-family:'Cormorant Garamond',serif;font-weight:600}
+.screen{display:none;min-height:100dvh;padding:1.25rem;max-width:460px;margin:0 auto;flex-direction:column}
+.screen.active{display:flex}
+.logo{font-size:2.5rem;text-align:center;color:var(--cream);text-shadow:0 2px 16px rgba(201,162,39,.3)}
+.subtitle{text-align:center;color:var(--pink);font-size:.9rem;margin:.3rem 0 1.5rem}
+.card{background:rgba(250,246,241,.07);border:1px solid rgba(212,165,165,.25);border-radius:var(--radius);padding:1.4rem;backdrop-filter:blur(10px)}
+.input-group{margin-bottom:1rem}
+.input-group label{display:block;font-size:.78rem;color:var(--pink);margin-bottom:.3rem}
+.input-group input,.input-group select{width:100%;padding:.8rem 1rem;border-radius:12px;border:1px solid rgba(212,165,165,.35);background:rgba(26,10,15,.5);color:var(--cream);font-size:1rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:.9rem 1.4rem;border-radius:14px;font-weight:600;font-size:1rem;width:100%;border:none;cursor:pointer;transition:.25s}
+.btn-primary{background:linear-gradient(135deg,var(--red),#6b1a2f);color:#fff;box-shadow:0 6px 18px rgba(155,35,53,.4)}
+.btn-secondary{background:rgba(250,246,241,.1);color:var(--cream);border:1px solid rgba(212,165,165,.3)}
+.btn-ghost{background:transparent;color:var(--pink);font-size:.88rem;padding:.5rem}
+.chip-group{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.35rem}
+.chip{padding:.4rem .85rem;border-radius:999px;font-size:.8rem;background:rgba(250,246,241,.08);border:1px solid rgba(212,165,165,.3);color:var(--cream);cursor:pointer}
+.chip.active{background:var(--red);border-color:var(--red);color:#fff}
+.age-note{text-align:center;font-size:.72rem;color:rgba(212,165,165,.65);margin-top:1.4rem}
+.player-badge{text-align:center;margin-bottom:1.1rem}
+.player-badge .name{font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--gold)}
+.player-badge .role{font-size:.8rem;color:var(--pink);letter-spacing:.08em;text-transform:uppercase}
+.choice-buttons{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin:1.3rem 0}
+.choice-btn{padding:1.3rem .9rem;border-radius:var(--radius);font-size:1.1rem;font-weight:600;background:rgba(250,246,241,.1);border:1px solid rgba(212,165,165,.3);color:var(--cream);cursor:pointer}
+.choice-btn:hover{background:rgba(250,246,241,.18)}
+.card-reveal{background:linear-gradient(160deg,#2a1018,#1a0a0f);border:1px solid rgba(201,162,39,.35);border-radius:var(--radius);padding:1.6rem 1.4rem;margin:1rem 0;min-height:160px;display:flex;flex-direction:column;justify-content:center}
+.card-meta{font-size:.72rem;color:var(--pink);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.6rem}
+.card-text{font-size:1.1rem;line-height:1.5}
+.stats-bar{display:flex;justify-content:space-around;font-size:.78rem;color:var(--pink);margin-top:auto;padding-top:.9rem;border-top:1px solid rgba(212,165,165,.12)}
+.footer-links{display:flex;justify-content:center;gap:1.1rem;margin-top:1.2rem;font-size:.85rem}
+.footer-links button{background:none;border:none;color:var(--pink);cursor:pointer}
+.modal-overlay{position:fixed;inset:0;background:rgba(10,5,8,.75);display:none;align-items:center;justify-content:center;z-index:50;padding:1rem}
+.modal-overlay.open{display:flex}
+.modal{background:linear-gradient(160deg,#2a1018,#1a0a0f);border:1px solid rgba(212,165,165,.3);border-radius:var(--radius);padding:1.4rem;max-width:380px;width:100%;max-height:85dvh;overflow-y:auto}
+.toggle-row{display:flex;justify-content:space-between;align-items:center;padding:.65rem 0;border-bottom:1px solid rgba(212,165,165,.1)}
+.toggle{width:46px;height:26px;background:rgba(250,246,241,.15);border-radius:13px;position:relative;cursor:pointer}
+.toggle.on{background:var(--red)}
+.toggle::after{content:'';position:absolute;width:20px;height:20px;background:#fff;border-radius:50%;top:3px;left:3px;transition:.2s}
+.toggle.on::after{left:23px}
+.btn-row{display:flex;gap:.7rem;margin-top:.8rem}
+.btn-row .btn{flex:1}
+</style>
+</head>
+<body>
+<div id="s-start" class="screen active">
+  <div class="logo">Mezi námi</div>
+  <p class="subtitle">Romantická & intimní hra pro dva dospělé</p>
+  <div class="card">
+    <div class="input-group"><label>Jméno dívky</label><input id="nameG" maxlength="20" placeholder="např. Anička"/></div>
+    <div class="input-group"><label>Jméno chlapce</label><input id="nameB" maxlength="20" placeholder="např. Petr"/></div>
+    <div class="input-group"><label>Režim</label><div class="chip-group" id="modes"></div></div>
+    <div class="input-group"><label>Intenzita</label><div class="chip-group" id="ints"></div></div>
+    <button class="btn btn-primary" id="btnStart" style="margin-top:.8rem">Začít hru</button>
+    <div class="footer-links">
+      <button id="btnRules">Pravidla</button>
+      <button id="btnCustom">Vlastní</button>
+      <button id="btnSet">Nastavení</button>
+    </div>
+  </div>
+  <p class="age-note">18+ · Každou výzvu lze kdykoli odmítnout bez trestu. Respektujte souhlas partnera.</p>
+</div>
+
+<div id="s-game" class="screen">
+  <div class="player-badge"><div class="role" id="role">Na řadě</div><div class="name" id="pname">—</div></div>
+  <div id="choice">
+    <p style="text-align:center;color:var(--pink);font-size:.88rem">Vyber si</p>
+    <div class="choice-buttons">
+      <button class="choice-btn" id="btnT">Pravda</button>
+      <button class="choice-btn" id="btnD">Úkol</button>
+    </div>
+    <button class="btn btn-secondary" id="btnR">Losovat</button>
+  </div>
+  <div id="cardA" style="display:none">
+    <div class="card-reveal"><div class="card-meta" id="cmeta"></div><div class="card-text" id="ctext"></div></div>
+    <div class="btn-row"><button class="btn btn-primary" id="btnDone">Splněno</button><button class="btn btn-secondary" id="btnSkip">Přeskočit</button></div>
+    <button class="btn btn-ghost" id="btnAnother">Jiná výzva</button>
+  </div>
+  <div class="stats-bar"><span>Tahy: <b id="stT">0</b></span><span>Splněno: <b id="stD">0</b></span><span>Přeskočeno: <b id="stS">0</b></span></div>
+  <div class="footer-links"><button id="btnEnd">Ukončit</button><button id="btnInt">Intenzita</button></div>
+</div>
+
+<div id="s-sum" class="screen">
+  <div class="logo" style="font-size:2rem">Konec hry</div>
+  <div class="card" style="margin-top:1.4rem;text-align:center">
+    <p style="color:var(--pink);margin-bottom:1rem">Děkujeme za hru.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.2rem 0">
+      <div><div style="font-size:1.7rem;color:var(--gold)" id="suT">0</div><div style="font-size:.75rem;color:var(--pink)">Tahů</div></div>
+      <div><div style="font-size:1.7rem;color:var(--gold)" id="suD">0</div><div style="font-size:.75rem;color:var(--pink)">Splněno</div></div>
+    </div>
+    <button class="btn btn-primary" id="btnNew">Nová hra</button>
+    <button class="btn btn-secondary" id="btnBack" style="margin-top:.6rem">Úvod</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="mRules"><div class="modal"><h2 style="color:var(--gold);margin-bottom:.8rem">Pravidla & soukromí</h2><p style="font-size:.88rem;margin-bottom:.6rem">Hra je pro dospělé 18+. Oba mohou kdykoli odmítnout jakoukoli výzvu bez trestu. Vždy respektujte souhlas partnera.</p><p style="font-size:.88rem;margin-bottom:.6rem">Žádná data se neodesílají. Vlastní obsah zůstává jen ve vašem zařízení.</p><button class="btn btn-primary" data-c="mRules">Zavřít</button></div></div>
+<div class="modal-overlay" id="mSet"><div class="modal"><h2 style="color:var(--gold);margin-bottom:.8rem">Nastavení</h2><div class="toggle-row"><span>Zvuky</span><div class="toggle" id="tSound"></div></div><div class="toggle-row"><span>Časovač</span><div class="toggle" id="tTimer"></div></div><button class="btn btn-primary" style="margin-top:1rem" data-c="mSet">Hotovo</button></div></div>
+<div class="modal-overlay" id="mCustom"><div class="modal"><h2 style="color:var(--gold);margin-bottom:.8rem">Vlastní obsah</h2><div class="input-group"><label>Typ</label><select id="cType"><option value="truth">Pravda</option><option value="dare">Úkol</option></select></div><div class="input-group"><label>Text</label><input id="cText" maxlength="280" placeholder="Text výzvy…"/></div><div class="input-group"><label>Kategorie</label><select id="cCat"><option value="romantika">Romantika</option><option value="flirt">Flirt</option><option value="humor">Humor</option><option value="partnersky">Partnerský</option><option value="18plus">18+</option></select></div><div class="input-group"><label>Intenzita</label><select id="cInt"><option value="1">Lehká</option><option value="2">Střední</option><option value="3">Odvážná</option><option value="4">Intenzivní</option></select></div><button class="btn btn-primary" id="btnAdd">Přidat</button><div id="cList" style="margin-top:1rem;max-height:180px;overflow-y:auto;font-size:.82rem"></div><button class="btn btn-secondary" style="margin-top:.8rem" data-c="mCustom">Zavřít</button></div></div>
+<div class="modal-overlay" id="mInt"><div class="modal"><h2 style="color:var(--gold);margin-bottom:.8rem">Intenzita</h2><div class="chip-group" id="intsLive"></div><button class="btn btn-primary" style="margin-top:1rem" data-c="mInt">Hotovo</button></div></div>
+
+<script>
+const MODES=[{id:"romantika",l:"Romantika"},{id:"zábava",l:"Zábava"},{id:"odvážné",l:"Odvážné"},{id:"partnersky",l:"Partnerský"},{id:"18plus",l:"18+"},{id:"mix",l:"Mix"}];
+const INTS=[{id:1,l:"Lehká"},{id:2,l:"Střední"},{id:3,l:"Odvážná"},{id:4,l:"Intenzivní"}];
+const RAW=[
+{id:"t1",type:"truth",text:"Jaká pozice ti se mnou chutná nejvíc a proč?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t2",type:"truth",text:"Kde na mém těle chceš, abych tě líbal/a nejdřív, když se svlékáme?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t3",type:"truth",text:"Jaký orální sex od tebe nejvíc miluju / co ti při něm chutná nejvíc?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t4",type:"truth",text:"Chceš, abych ti při sexu říkal/a špinavé věci? Jaké přesně?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t5",type:"truth",text:"Jaký je tvůj nejoblíbenější způsob, jak se se mnou dostat k orgasmu?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t6",type:"truth",text:"Už jsi někdy chtěl/a, abych tě držel/a pevněji nebo ti tahal/a za vlasy? Jak silně?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t7",type:"truth",text:"Co bys chtěl/a, abych ti udělal/a jazykem, co jsme ještě nezkusili?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t8",type:"truth",text:"Jaká fantazie o nás dvou tě nejvíc vzrušuje, když se masturbuješ?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t9",type:"truth",text:"Chceš zkusit anál se mnou? Pokud ano, jak bys to chtěl/a začít?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t10",type:"truth",text:"Jaký kousek prádla na sobě teď nosíš a jak bys chtěl/a, abych ti ho sundal/a?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t11",type:"truth",text:"Kde bys se mnou chtěl/a mít sex, kam jsme ještě nešli (auto, sprcha, stůl…)?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t12",type:"truth",text:"Jaký zvuk, který vydávám při sexu, tě nejvíc dráždí?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t13",type:"truth",text:"Chceš, abych tě při sexu spoutal/a? Čím a jak?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t14",type:"truth",text:"Jaký je tvůj nejoblíbenější způsob, jak ti dát prsty?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t15",type:"truth",text:"Co bys chtěl/a, abych ti šeptal/a do ucha, když jsem hluboko v tobě / v tobě?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t16",type:"truth",text:"Už jsi někdy chtěl/a, abych tě vzal/a zepředu i zezadu ve stejný den? Jak bys to chtěl/a?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t17",type:"truth",text:"Jaká role-play scéna s tebou tě nejvíc vzrušuje?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t18",type:"truth",text:"Chceš, abych ti při orálu lízal/a i místečka kolem? Která?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t19",type:"truth",text:"Jaký je tvůj nejoblíbenější způsob, jak se se mnou líbat, když jsme oba nazí?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t20",type:"truth",text:"Co bys chtěl/a, abych ti udělal/a s hračkou, kterou ještě nemáme?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t21",type:"truth",text:"Jak silně chceš, abych tě tlačil/a k posteli / ke zdi, když se začínáme milovat?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t22",type:"truth",text:"Kde na mém těle chceš, abych tě nechal/a kousnout nebo olíznout?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t23",type:"truth",text:"Jaký je tvůj nejoblíbenější způsob, jak se se mnou dostat k orgasmu prsty?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t24",type:"truth",text:"Chceš, abych ti při sexu zakryl/a oči? Proč?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t25",type:"truth",text:"Jaká pozice ti se mnou chutná nejméně a kterou bys chtěl/a zkusit znovu jinak?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t26",type:"truth",text:"Co bys chtěl/a, abych ti řekl/a, když se v tobě / v tobě uvolním?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t27",type:"truth",text:"Jaký je tvůj nejoblíbenější způsob, jak se se mnou líbat mezi nohama?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t28",type:"truth",text:"Chceš zkusit, abych tě vzal/a, když jsi ještě mokrá/ý z předchozího orgasmu?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t29",type:"truth",text:"Jaká část mého těla ti při sexu chutná nejvíc v puse?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t30",type:"truth",text:"Co bys chtěl/a, abych ti udělal/a, když se ráno probudíme a oba jsme ještě nazí?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t31",type:"truth",text:"Jak silně chceš, abych ti při sexu stiskl/a bradavky nebo klitoris?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t32",type:"truth",text:"Chceš, abych tě při sexu chválil/a nebo naopak urážel/a (v dobrém)?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t33",type:"truth",text:"Jaký je tvůj nejoblíbenější způsob, jak se se mnou dostat k orgasmu, když jsme ve sprše?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t34",type:"truth",text:"Kde bys chtěl/a, abych tě lízal/a, když se svlékáš?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t35",type:"truth",text:"Co bys chtěl/a, abych ti udělal/a s jazykem na bradavkách a kolem nich?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t36",type:"truth",text:"Jaká fantazie o nás dvou v veřejném místě tě nejvíc dráždí (bez rizika)?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t37",type:"truth",text:"Chceš, abych ti při sexu držel/a ruce nad hlavou? Jak dlouho?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t38",type:"truth",text:"Jaký je tvůj nejoblíbenější způsob, jak se se mnou dostat k orgasmu, když jsi nahoře?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t39",type:"truth",text:"Co bys chtěl/a, abych ti udělal/a, když se po sexu ještě držíme?",cat:"18plus",int:2,m:["18plus","mix"]},
+{id:"t40",type:"truth",text:"Jak silně chceš, abych tě při sexu tiskl/a k sobě, když se blížíme k orgasmu?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t41",type:"truth",text:"Která pozice ti se mnou dává nejhlubší pocit a proč?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t42",type:"truth",text:"Chceš, abych ti při orálu zároveň dával/a prsty? Jak?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t43",type:"truth",text:"Jaký je tvůj nejoblíbenější způsob, jak se se mnou líbat, když jsi na kolenou?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t44",type:"truth",text:"Co bys chtěl/a, abych ti udělal/a s hračkou, kterou už máme?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t45",type:"truth",text:"Jaká část tvého těla chce, abych ji teď nejdřív olízl/a nebo políbil/a?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t46",type:"truth",text:"Chceš zkusit, abych tě vzal/a zezadu, když jsi ohnutá/ý přes postel?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t47",type:"truth",text:"Jaký dirty talk od tebe tě nejvíc přivádí k orgasmu?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t48",type:"truth",text:"Co bys chtěl/a, abych ti udělal/a, když se ráno ještě tváříš, že spíš?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t49",type:"truth",text:"Jak silně chceš, abych ti při sexu stiskl/a zadek?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t50",type:"truth",text:"Která pozice ti se mnou chutná nejvíc, když se díváme jeden druhému do očí?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d1",type:"dare",text:"Polib partnerovi/partnerce krk a šeptni mu/jí, co bys chtěl/a, aby ti teď udělal/a (se souhlasem).",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d2",type:"dare",text:"Pohlaď partnerovi/partnerce vnitřní stranu stehna nahoru (přes oblečení) a podívej se mu/jí do očí.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d3",type:"dare",text:"Šeptni partnerovi/partnerce do ucha svůj nejoblíbenější dirty talk a použij ho teď.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d4",type:"dare",text:"Nech partnera/partnerku, ať ti 20 sekund líbá krk, zatímco mu/jí hladíš záda (se souhlasem).",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d5",type:"dare",text:"Řekni partnerovi/partnerce, kterou pozici chceš zkusit jako další, a popiš, jak bys to chtěl/a.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d6",type:"dare",text:"Pohlaď partnerovi/partnerce bradavku přes oblečení a podívej se mu/jí do očí (se souhlasem).",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d7",type:"dare",text:"Šeptni partnerovi/partnerce, co bys chtěl/a, aby ti udělal/a jazykem, a nech ho/ji, ať to zkusí (přes oblečení, se souhlasem).",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"d8",type:"dare",text:"Nech partnera/partnerku, ať ti 15 sekund drží za vlasy a líbá tě na krk (se souhlasem).",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d9",type:"dare",text:"Řekni partnerovi/partnerce, jak bys chtěl/a, aby tě líbal/a mezi nohama, a nech ho/ji, ať to zkusí (přes oblečení, se souhlasem).",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"d10",type:"dare",text:"Pohlaď partnerovi/partnerce zadek a řekni mu/jí, co se ti na něm líbí (se souhlasem).",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d11",type:"dare",text:"Šeptni partnerovi/partnerce, co bys chtěl/a zkusit v posteli dnes večer, a nech ho/ji odpovědět.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d12",type:"dare",text:"Nech partnera/partnerku, ať ti 20 sekund masíruje stehna a šeptá ti dirty talk (se souhlasem).",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d13",type:"dare",text:"Řekni partnerovi/partnerce, které prádlo bys na něm/ní chtěl/a vidět, a popiš, jak bys ho sundal/a.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d14",type:"dare",text:"Pohlaď partnerovi/partnerce po celém těle (přes oblečení) 20 sekund a řekni mu/jí, co cítíš.",cat:"18plus",int:2,m:["18plus","mix"]},
+{id:"d15",type:"dare",text:"Šeptni partnerovi/partnerce, jak bys chtěl/a, aby tě spoutal/a (pokud souhlasí), a nech ho/ji reagovat.",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"d16",type:"dare",text:"Nech partnera/partnerku, ať ti 15 sekund líbá ucho a jemně drží za krk (se souhlasem).",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d17",type:"dare",text:"Řekni partnerovi/partnerce svůj nejoblíbenější způsob, jak dostat orál, a nech ho/ji, ať to zkusí (přes oblečení, se souhlasem).",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"d18",type:"dare",text:"Pohlaď partnerovi/partnerce vnitřní stranu stehna a podívej se mu/jí do očí, zatímco mu/jí šeptáš kompliment.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d19",type:"dare",text:"Šeptni partnerovi/partnerce, co bys chtěl/a, aby ti udělal/a s prsty, a nech ho/ji, ať to zkusí (přes oblečení, se souhlasem).",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"d20",type:"dare",text:"Nech partnera/partnerku, ať ti 20 sekund masíruje krk a šeptá ti, co bys chtěl/a, aby ti udělal/a dál.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d21",type:"dare",text:"Řekni partnerovi/partnerce, kterou pozici chceš zkusit jako další, a pohlaď ho/ji při tom.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d22",type:"dare",text:"Pohlaď partnerovi/partnerce bradavku přes oblečení a šeptni mu/jí, co bys chtěl/a, aby ti udělal/a jazykem.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d23",type:"dare",text:"Šeptni partnerovi/partnerce svůj tajný kink, který bys s ním/ní chtěl/a zkusit, a nech ho/ji reagovat.",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"d24",type:"dare",text:"Nech partnera/partnerku, ať ti 15 sekund drží za vlasy a líbá tě na krk, zatímco ti šeptá dirty talk.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d25",type:"dare",text:"Řekni partnerovi/partnerce, jak bys chtěl/a, aby tě líbal/a mezi nohama, a nech ho/ji, ať to zkusí (přes oblečení, se souhlasem).",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"d26",type:"dare",text:"Pohlaď partnerovi/partnerce zadek a řekni mu/jí, co se ti na něm líbí, zatímco mu/jí šeptáš dirty talk.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d27",type:"dare",text:"Šeptni partnerovi/partnerce, co bys chtěl/a zkusit v posteli dnes večer, a nech ho/ji, ať ti odpoví stejným stylem.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d28",type:"dare",text:"Nech partnera/partnerku, ať ti 20 sekund masíruje stehna a šeptá ti, co bys chtěl/a, aby ti udělal/a dál.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d29",type:"dare",text:"Řekni partnerovi/partnerce, které prádlo bys na něm/ní chtěl/a vidět, a popiš, jak bys ho sundal/a zuby.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d30",type:"dare",text:"Pohlaď partnerovi/partnerce po celém těle (přes oblečení) a řekni mu/jí, co bys chtěl/a, aby ti udělal/a dál.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d31",type:"dare",text:"Šeptni partnerovi/partnerce, jak bys chtěl/a, aby tě spoutal/a (pokud souhlasí), a nech ho/ji reagovat.",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"d32",type:"dare",text:"Nech partnera/partnerku, ať ti 15 sekund líbá ucho a jemně drží za krk, zatímco ti šeptá komplimenty.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d33",type:"dare",text:"Řekni partnerovi/partnerce svůj nejoblíbenější způsob, jak dostat orál, a nech ho/ji, ať to zkusí (přes oblečení, se souhlasem).",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"d34",type:"dare",text:"Pohlaď partnerovi/partnerce vnitřní stranu stehna nahoru a podívej se mu/jí do očí, zatímco mu/jí šeptáš, co bys chtěl/a dál.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d35",type:"dare",text:"Šeptni partnerovi/partnerce, co bys chtěl/a, aby ti udělal/a s prsty, a nech ho/ji, ať to zkusí (přes oblečení, se souhlasem).",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"d36",type:"dare",text:"Nech partnera/partnerku, ať ti 20 sekund masíruje krk a šeptá ti dirty talk.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d37",type:"dare",text:"Řekni partnerovi/partnerce, kterou pozici chceš zkusit jako další, a pohlaď ho/ji při tom po stehnech.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d38",type:"dare",text:"Pohlaď partnerovi/partnerce bradavku přes oblečení a šeptni mu/jí, co bys chtěl/a, aby ti udělal/a jazykem.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d39",type:"dare",text:"Šeptni partnerovi/partnerce svůj tajný kink, který bys s ním/ní chtěl/a zkusit, a nech ho/ji reagovat.",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"d40",type:"dare",text:"Nech partnera/partnerku, ať ti 15 sekund drží za vlasy a líbá tě na krk, zatímco ti šeptá, co bys chtěl/a, aby ti udělal/a dál.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d41",type:"dare",text:"Řekni partnerovi/partnerce, jak bys chtěl/a, aby tě líbal/a mezi nohama, a nech ho/ji, ať to zkusí (přes oblečení, se souhlasem).",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"d42",type:"dare",text:"Pohlaď partnerovi/partnerce zadek a řekni mu/jí, co se ti na něm líbí, zatímco mu/jí šeptáš dirty talk.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d43",type:"dare",text:"Šeptni partnerovi/partnerce, co bys chtěl/a zkusit v posteli dnes večer, a nech ho/ji, ať ti odpoví stejným stylem.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d44",type:"dare",text:"Nech partnera/partnerku, ať ti 20 sekund masíruje stehna a šeptá ti, co bys chtěl/a, aby ti udělal/a dál.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d45",type:"dare",text:"Řekni partnerovi/partnerce, které prádlo bys na něm/ní chtěl/a vidět, a popiš, jak bys ho sundal/a zuby.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d46",type:"dare",text:"Pohlaď partnerovi/partnerce po celém těle (přes oblečení) a řekni mu/jí, co bys chtěl/a, aby ti udělal/a dál.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d47",type:"dare",text:"Šeptni partnerovi/partnerce, jak bys chtěl/a, aby tě spoutal/a (pokud souhlasí), a nech ho/ji reagovat.",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"d48",type:"dare",text:"Nech partnera/partnerku, ať ti 15 sekund líbá ucho a jemně drží za krk, zatímco ti šeptá dirty talk.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d49",type:"dare",text:"Řekni partnerovi/partnerce svůj nejoblíbenější způsob, jak dostat orál, a nech ho/ji, ať to zkusí (přes oblečení, se souhlasem).",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"d50",type:"dare",text:"Pohlaď partnerovi/partnerce vnitřní stranu stehna nahoru a podívej se mu/jí do očí, zatímco mu/jí šeptáš, co bys chtěl/a dál.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t51",type:"truth",text:"Co na mě na první pohled nejvíc zaujalo?",cat:"romantika",int:1,m:["romantika","mix"]},
+{id:"t52",type:"truth",text:"Jaký je tvůj nejoblíbenější způsob, jak trávit společný večer?",cat:"romantika",int:1,m:["romantika","mix"]},
+{id:"t53",type:"truth",text:"Jaký kompliment bys mi chtěl/a říct právě teď?",cat:"flirt",int:1,m:["flirt","mix"]},
+{id:"t54",type:"truth",text:"Co bys na mně nejraději změnil/a a co bys nikdy neměnil/a?",cat:"partnersky",int:2,m:["partnersky","mix"]},
+{id:"d51",type:"dare",text:"Pohlaď partnerovi/partnerce tvář a řekni jeden upřímný kompliment.",cat:"romantika",int:1,m:["romantika","mix"]},
+{id:"d52",type:"dare",text:"Podrž partnerovi/partnerce ruku 30 sekund a podívej se mu/jí do očí.",cat:"romantika",int:1,m:["romantika","mix"]},
+{id:"d53",type:"dare",text:"Řekni partnerovi/partnerce tři věci, které na něm/ní obdivuješ.",cat:"partnersky",int:1,m:["partnersky","mix"]},
+{id:"d54",type:"dare",text:"Udělej partnerovi/partnerce 20 sekundovou masáž ramen.",cat:"romantika",int:1,m:["romantika","mix"]}
+];
+const ITEMS=[...RAW];
+const state={girl:"",boy:"",mode:"romantika",int:2,sound:false,timer:false,activeG:true,turns:0,done:0,skip:0,card:null,used:new Set(),custom:JSON.parse(localStorage.getItem("mnCustom")||"[]")};
+const $=id=>document.getElementById(id);
+function show(n){["s-start","s-game","s-sum"].forEach(id=>$(id).classList.toggle("active",id===n));}
+function chips(el,list,sel,cb){el.innerHTML="";list.forEach(i=>{const b=document.createElement("button");b.type="button";b.className="chip"+(i.id===sel?" active":"");b.textContent=i.l;b.onclick=()=>cb(i.id);el.appendChild(b);});}
+function initC(){chips($("modes"),MODES,state.mode,v=>{state.mode=v;initC();});chips($("ints"),INTS,state.int,v=>{state.int=v;initC();});chips($("intsLive"),INTS,state.int,v=>{state.int=v;initC();});}
+function filter(type){const all=ITEMS.concat(state.custom);return all.filter(i=>{if(i.type!==type)return false;if(i.int>state.int)return false;if(state.mode==="mix")return true;if(i.m&&i.m.includes(state.mode))return true;if(i.cat===state.mode)return true;if(state.mode==="18plus"&&(i.cat==="18plus"||i.cat==="smyslnost"))return true;if(state.mode==="romantika"&&(i.cat==="romantika"||i.cat==="flirt"))return true;if(state.mode==="zábava"&&(i.cat==="humor"||i.cat==="zábava"))return true;if(state.mode==="partnersky"&&(i.cat==="partnersky"||i.cat==="osobni"))return true;return false;});}
+function pick(type){let p=filter(type).filter(i=>!state.used.has(i.id));if(!p.length){state.used.clear();p=filter(type);}if(!p.length)return{id:"e",type,text:"Pro tuto kombinaci nemáme dost karet. Změň režim, intenzitu nebo přidej vlastní.",cat:"systém",int:1};const c=p[Math.floor(Math.random()*p.length)];state.used.add(c.id);return c;}
+function badge(){$("pname").textContent=state.activeG?state.girl:state.boy;$("role").textContent="Teď jsi na řadě · "+(state.activeG?"Dívka":"Chlapec");}
+function stats(){$("stT").textContent=state.turns;$("stD").textContent=state.done;$("stS").textContent=state.skip;}
+function choice(){$("choice").style.display="block";$("cardA").style.display="none";badge();stats();}
+function reveal(c){state.card=c;$("choice").style.display="none";$("cardA").style.display="block";$("cmeta").textContent=(c.type==="truth"?"Pravda":"Úkol")+" · "+(c.cat||"")+" · int. "+(c.int||"");$("ctext").textContent=c.text;}
+function next(){state.activeG=!state.activeG;state.turns++;choice();}
+$("btnStart").onclick=()=>{const g=$("nameG").value.trim(),b=$("nameB").value.trim();if(!g||!b)return alert("Vyplňte obě jména.");state.girl=g;state.boy=b;state.activeG=Math.random()<.5;state.turns=0;state.done=0;state.skip=0;state.used.clear();show("s-game");choice();};
+$("btnT").onclick=()=>reveal(pick("truth"));
+$("btnD").onclick=()=>reveal(pick("dare"));
+$("btnR").onclick=()=>{const t=Math.random()<.5?"truth":"dare";reveal(pick(t));};
+$("btnDone").onclick=()=>{state.done++;next();};
+$("btnSkip").onclick=()=>{state.skip++;choice();stats();};
+$("btnAnother").onclick=()=>{if(state.card)reveal(pick(state.card.type));};
+$("btnEnd").onclick=()=>{$("suT").textContent=state.turns;$("suD").textContent=state.done;show("s-sum");};
+$("btnNew").onclick=()=>show("s-start");
+$("btnBack").onclick=()=>show("s-start");
+$("btnInt").onclick=()=>$("mInt").classList.add("open");
+$("btnRules").onclick=()=>$("mRules").classList.add("open");
+$("btnSet").onclick=()=>$("mSet").classList.add("open");
+$("btnCustom").onclick=()=>{rC();$("mCustom").classList.add("open");};
+document.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>$(b.dataset.c).classList.remove("open"));
+function tog(id,k){const e=$(id);e.classList.toggle("on",state[k]);e.onclick=()=>{state[k]=!state[k];e.classList.toggle("on",state[k]);};}
+tog("tSound","sound");tog("tTimer","timer");
+function rC(){const l=$("cList");if(!state.custom.length){l.innerHTML="<p style='color:var(--pink)'>Zatím nic.</p>";return;}l.innerHTML=state.custom.map((c,i)=>`<div style="padding:.4rem 0;border-bottom:1px solid rgba(212,165,165,.12);display:flex;justify-content:space-between"><span>${c.type==="truth"?"P":"Ú"}: ${c.text.slice(0,50)}${c.text.length>50?"…":""}</span><button style="color:var(--red);background:none;border:none;cursor:pointer" data-d="${i}">×</button></div>`).join("");l.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{state.custom.splice(+b.dataset.d,1);localStorage.setItem("mnCustom",JSON.stringify(state.custom));rC();});}
+$("btnAdd").onclick=()=>{const t=$("cText").value.trim();if(!t)return alert("Napište text.");state.custom.push({id:"c"+Date.now(),type:$("cType").value,text:t,cat:$("cCat").value,int:+$("cInt").value,m:["mix",$("cCat").value]});localStorage.setItem("mnCustom",JSON.stringify(state.custom));$("cText").value="";rC();};
+initC();
+console.log("Položek:",ITEMS.filter(i=>i.type==="truth").length,"pravd,",ITEMS.filter(i=>i.type==="dare").length,"úkolů");
+</script>
+</body>
+</html>
