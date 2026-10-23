@@ -1,95 +1,235 @@
-<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#32101e"><meta name="description" content="Mezi námi — hra Pravda, nebo úkol pro dva dospělé."><title>Mezi námi — Pravda, nebo úkol</title><style>
-:root{color-scheme:dark;--bg:#190b12;--p:#2b111d;--line:#693047;--pink:#f3a7bb;--cream:#fff4ed;--muted:#d7b9c3}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -10%,#762943,transparent 45%),var(--bg);color:var(--cream);font:16px/1.55 system-ui,-apple-system,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer;color:inherit;border:1px solid var(--line);background:#ffffff08;border-radius:14px;padding:12px 16px}button:hover,button:focus-visible{border-color:var(--pink);background:#ffffff12}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #f0c8a0;outline-offset:2px}.primary{background:linear-gradient(135deg,#c44c6a,#8d2848);font-weight:750}.shell{width:min(900px,100%);margin:auto;padding:clamp(14px,4vw,36px)}header,.row,.stats,.actions,.chips{display:flex;gap:10px;align-items:center;flex-wrap:wrap}header{justify-content:space-between;margin-bottom:26px}.brand{font-weight:900;letter-spacing:.14em}.brand span,.eyebrow{color:var(--pink)}.panel{background:linear-gradient(145deg,#351724f5,#24101af7);border:1px solid #75405488;border-radius:24px;padding:clamp(18px,4vw,34px);box-shadow:0 22px 70px #08030788}.hero{text-align:center;margin:10px auto 24px}.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:.75rem;font-weight:850}.hero h1{font-size:clamp(2.6rem,9vw,5rem);line-height:1;letter-spacing:-.06em;margin:12px 0}.hero em{font-family:Georgia,serif;color:var(--pink);font-weight:400}.muted,.fine,small{color:var(--muted)}.fine{font-size:.84rem}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.field{display:flex;flex-direction:column;gap:7px}.field label{color:var(--muted);font-size:.88rem}.field input,.field select,.field textarea{width:100%;min-width:0;background:#170911;color:var(--cream);border:1px solid var(--line);border-radius:12px;padding:13px}.field textarea{min-height:100px}.section{margin-top:22px}.modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.mode{text-align:left;background:#1d0c15}.mode b,.mode small{display:block}.mode small{margin-top:4px}.selected,.chip[aria-pressed=true]{border-color:var(--pink);background:#6e203c66}.chip{border-radius:99px;padding:8px 13px;color:var(--muted)}.notice{padding:12px;border:1px solid #a34c6b66;background:#6e203c33;border-radius:13px}.actions{margin-top:20px}.actions button{flex:1;min-width:130px}.hidden{display:none!important}.gamehead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.turn{font-weight:900;color:#fff4ed;font-size:1.15rem}.turnbar{position:sticky;top:8px;z-index:5;margin:0 0 16px;padding:14px 18px;border:2px solid var(--pink);border-radius:16px;background:linear-gradient(110deg,#8d2848f5,#401829f5);box-shadow:0 12px 32px #080307aa;text-align:center}.turnbar .eyebrow{font-size:.68rem}.turnbar .turn{font-size:clamp(1.1rem,4vw,1.5rem);letter-spacing:.01em}.turnbar .turn::before{content:'● ';color:#ffc3d1}.stat{padding:7px 10px;border:1px solid var(--line);border-radius:10px;color:var(--muted);font-size:.84rem}.stat b{color:var(--cream)}.choices{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0}.choice{min-height:120px;text-align:left;background:linear-gradient(145deg,#4b1a2d,#28111d)}.choice b{display:block;font-size:1.45rem}.card{border:1px solid #a34e6d99;border-radius:22px;padding:clamp(24px,5vw,42px);background:radial-gradient(ellipse at 90% 0,#6d284455,transparent 45%),linear-gradient(145deg,#401829,#210d17);animation:reveal .3s ease}.card h2{font-size:clamp(1.5rem,4vw,2.25rem);line-height:1.25}.cardtype{color:var(--pink);font-weight:850;font-size:.76rem;letter-spacing:.15em}.stats{margin-top:12px}.footer{margin-top:22px;color:#b994a1;font-size:.78rem;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.item{border-bottom:1px solid #ffffff15;padding:12px 0}.modal{position:fixed;inset:0;background:#090409dd;display:grid;place-items:center;padding:18px}.modalbox{max-width:560px;background:#2a111d;border:1px solid var(--line);border-radius:20px;padding:24px;max-height:88vh;overflow:auto}@keyframes reveal{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@media(max-width:600px){.shell{padding:14px 12px}.grid{grid-template-columns:1fr}.modes{grid-template-columns:1fr 1fr}.panel{border-radius:20px}.choices{gap:8px}.choice{padding:14px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
-</style></head><body><div class="shell"><header><div class="brand">MEZI <span>NÁMI</span></div><button id="rules">Pravidla a soukromí</button></header>
-<main><section id="home"><div class="hero"><div class="eyebrow">Hra pro dva · 18+</div><h1>To nejhezčí je<br><em>mezi námi.</em></h1><p class="muted">Otázky, malé výzvy a chvíle, které vás sblíží. Hrajte vlastním tempem — vaše hranice jsou vždy na prvním místě.</p></div><div class="panel">
-<div class="grid"><div class="field"><label for="p1">První hráčka · dívka</label><input id="p1" maxlength="32" placeholder="Např. Anička"></div><div class="field"><label for="p2">Druhý hráč · chlapec</label><input id="p2" maxlength="32" placeholder="Např. Petr"></div></div>
-<div class="section"><b>Herní režim</b><div class="modes" id="modes"></div></div><div class="section"><b>Intenzita</b><div class="chips" id="levels"><button class="chip" data-l="1">Lehká</button><button class="chip" data-l="2" aria-pressed="true">Střední</button><button class="chip" data-l="3">Odvážná</button><button class="chip" data-l="4">Intenzivní</button></div></div>
-<div class="section"><b>Hranice — vypněte nechtěná témata</b><div class="chips" id="cats"></div></div>
-<div class="section grid"><div class="field"><label for="start">Kdo začíná?</label><select id="start"><option value="r">Náhodně</option><option value="0">Dívka</option><option value="1">Chlapec</option></select></div><div class="field"><label for="timer">Časovač</label><select id="timer"><option value="0">Vypnutý</option><option value="30">30 sekund</option><option value="60">60 sekund</option></select></div></div>
-<div class="section grid"><label class="notice"><input type="checkbox" id="adult"> Oba potvrzujeme, že nám je 18+ a souhlasíme s pravidly.</label><label class="notice"><input type="checkbox" id="sound"> Zapnout jemné zvukové efekty.</label></div>
-<div class="actions"><button class="primary" id="startBtn">Začít hrát</button><button id="manageBtn">Vlastní výzvy</button></div><p class="fine">Bez účtu. Historie se neukládá. Vlastní položky zůstávají pouze v tomto zařízení.</p></div></section>
-<section id="game" class="hidden"><div class="turnbar" role="status" aria-live="polite"><div class="eyebrow">TEĎ HRAJE</div><div class="turn" id="turnSticky">Na řadě je hráč</div></div><div class="panel"><div class="gamehead"><div><div class="eyebrow">Právě hrajete</div><div class="turn" id="turn"></div></div><div class="stats"><div class="stat">Tahy <b id="turns">0</b></div><div class="stat">Splněno <b id="done">0</b></div><div class="stat">Přeskočeno <b id="skipped">0</b></div></div></div><div id="choose"><div class="hero"><h1 style="font-size:clamp(2rem,6vw,3.2rem)">Co si vybereš?</h1><p class="muted">Vyber si pravdu, úkol, nebo nech rozhodnout ruletu.</p></div><div class="choices"><button class="choice" id="truth"><b>Pravda</b><span class="muted">Odpověz jen pokud chceš.</span></button><button class="choice" id="dare"><b>Úkol</b><span class="muted">Výzva podle vašich pravidel.</span></button></div><button id="roulette" style="width:100%">Roztočit ruletu: Pravda nebo úkol</button></div><div id="current" class="hidden"><div class="card"><div class="cardtype" id="type"></div><h2 id="text"></h2><p class="muted" id="meta"></p></div><div class="actions"><button class="primary" id="complete">Splněno</button><button id="another">Jiná výzva</button><button id="skip">Přeskočit</button><button id="back">Zpět k výběru</button></div><p class="fine">Každou výzvu můžeš odmítnout. Bez trestu a vysvětlování.</p></div><div class="actions"><button id="settings">Hranice a intenzita</button><button id="end">Ukončit hru</button></div></div></section>
-<section id="custom" class="hidden"><div class="panel"><div class="eyebrow">Pouze v tomto zařízení</div><h1>Vlastní výzvy</h1><p class="fine">Obsah se ukládá pouze do místního úložiště prohlížeče.</p><div class="grid"><div class="field"><label for="ct">Typ</label><select id="ct"><option value="truth">Pravda</option><option value="dare">Úkol</option></select></div><div class="field"><label for="cc">Kategorie</label><select id="cc"></select></div><div class="field"><label for="cl">Intenzita</label><select id="cl"><option value="1">Lehká</option><option value="2" selected>Střední</option><option value="3">Odvážná</option><option value="4">Intenzivní</option></select></div><div class="field"><label for="cm">Náhodný mix</label><select id="cm"><option value="true">Zahrnout</option><option value="false">Nezahrnovat</option></select></div></div><div class="field section"><label for="cText">Text výzvy</label><textarea id="cText" maxlength="500" placeholder="Napište vlastní otázku nebo úkol…"></textarea></div><div class="actions"><button class="primary" id="save">Uložit</button><button id="homeBtn">Zpět na úvod</button><button id="clear">Smazat všechny vlastní výzvy</button></div><h2 class="section">Uložené položky</h2><div id="list"></div></div></section>
-<section id="summary" class="hidden"><div class="panel hero"><div class="eyebrow">Konec hry</div><h1>To bylo <em>mezi vámi.</em></h1><p id="summaryText"></p><div class="stats" style="justify-content:center"><div class="stat">Tahů <b id="st">0</b></div><div class="stat">Splněno <b id="sd">0</b></div><div class="stat">Přeskočeno <b id="ss">0</b></div></div><div class="actions"><button class="primary" id="new">Nová hra</button><button id="sumCustom">Vlastní výzvy</button></div><p class="fine">Dočasné statistiky se po ukončení hry smažou.</p></div></section></main><div class="footer"><span>MEZI NÁMI · Pro dospělé 18+</span><span>Dobrovolnost je vždy na prvním místě.</span></div></div>
-<div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="mt"><div class="modalbox"><h2 id="mt">Pravidla a soukromí</h2><p>Hra je určena dospělým od 18 let. Každý hráč může otázku odmítnout, úkol přeskočit nebo hru kdykoliv ukončit. Souhlas s jednou výzvou neznamená souhlas s jinou. Není vyžadován fyzický kontakt.</p><p>Historie hry se neukládá. Statistiky existují jen během aktivní relace. Vlastní výzvy se ukládají v localStorage tohoto prohlížeče a můžete je kdykoliv smazat. Aplikace nevyžaduje účet, kameru, mikrofon ani polohu.</p><button class="primary" id="close">Rozumím</button></div></div>
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="theme-color" content="#4a0e1f"/>
+<title>Mezi námi</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--wine:#4a0e1f;--red:#9b2335;--pink:#d4a5a5;--cream:#faf6f1;--dark:#1a0a0f;--gold:#c9a227;--radius:18px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,sans-serif;background:linear-gradient(160deg,#1a0a0f 0%,#4a0e1f 50%,#2a0a15 100%);color:var(--cream);min-height:100dvh;line-height:1.5}
+h1,.logo{font-family:'Cormorant Garamond',serif;font-weight:600}
+.screen{display:none;min-height:100dvh;padding:1.25rem;max-width:460px;margin:0 auto;flex-direction:column}
+.screen.active{display:flex}
+.logo{font-size:2.5rem;text-align:center;color:var(--cream);text-shadow:0 2px 16px rgba(201,162,39,.3)}
+.subtitle{text-align:center;color:var(--pink);font-size:.9rem;margin:.3rem 0 1.5rem}
+.card{background:rgba(250,246,241,.07);border:1px solid rgba(212,165,165,.25);border-radius:var(--radius);padding:1.4rem;backdrop-filter:blur(10px)}
+.input-group{margin-bottom:1rem}
+.input-group label{display:block;font-size:.78rem;color:var(--pink);margin-bottom:.3rem}
+.input-group input,.input-group select{width:100%;padding:.8rem 1rem;border-radius:12px;border:1px solid rgba(212,165,165,.35);background:rgba(26,10,15,.5);color:var(--cream);font-size:1rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:.9rem 1.4rem;border-radius:14px;font-weight:600;font-size:1rem;width:100%;border:none;cursor:pointer;transition:.25s}
+.btn-primary{background:linear-gradient(135deg,var(--red),#6b1a2f);color:#fff;box-shadow:0 6px 18px rgba(155,35,53,.4)}
+.btn-secondary{background:rgba(250,246,241,.1);color:var(--cream);border:1px solid rgba(212,165,165,.3)}
+.btn-ghost{background:transparent;color:var(--pink);font-size:.88rem;padding:.5rem}
+.chip-group{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.35rem}
+.chip{padding:.4rem .85rem;border-radius:999px;font-size:.8rem;background:rgba(250,246,241,.08);border:1px solid rgba(212,165,165,.3);color:var(--cream);cursor:pointer}
+.chip.active{background:var(--red);border-color:var(--red);color:#fff}
+.age-note{text-align:center;font-size:.72rem;color:rgba(212,165,165,.65);margin-top:1.4rem}
+.player-badge{text-align:center;margin-bottom:1.1rem}
+.player-badge .name{font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--gold)}
+.player-badge .role{font-size:.8rem;color:var(--pink);letter-spacing:.08em;text-transform:uppercase}
+.choice-buttons{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin:1.3rem 0}
+.choice-btn{padding:1.3rem .9rem;border-radius:var(--radius);font-size:1.1rem;font-weight:600;background:rgba(250,246,241,.1);border:1px solid rgba(212,165,165,.3);color:var(--cream);cursor:pointer}
+.choice-btn:hover{background:rgba(250,246,241,.18)}
+.card-reveal{background:linear-gradient(160deg,#2a1018,#1a0a0f);border:1px solid rgba(201,162,39,.35);border-radius:var(--radius);padding:1.6rem 1.4rem;margin:1rem 0;min-height:160px;display:flex;flex-direction:column;justify-content:center}
+.card-meta{font-size:.72rem;color:var(--pink);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.6rem}
+.card-text{font-size:1.1rem;line-height:1.5}
+.stats-bar{display:flex;justify-content:space-around;font-size:.78rem;color:var(--pink);margin-top:auto;padding-top:.9rem;border-top:1px solid rgba(212,165,165,.12)}
+.footer-links{display:flex;justify-content:center;gap:1.1rem;margin-top:1.2rem;font-size:.85rem}
+.footer-links button{background:none;border:none;color:var(--pink);cursor:pointer}
+.modal-overlay{position:fixed;inset:0;background:rgba(10,5,8,.75);display:none;align-items:center;justify-content:center;z-index:50;padding:1rem}
+.modal-overlay.open{display:flex}
+.modal{background:linear-gradient(160deg,#2a1018,#1a0a0f);border:1px solid rgba(212,165,165,.3);border-radius:var(--radius);padding:1.4rem;max-width:380px;width:100%;max-height:85dvh;overflow-y:auto}
+.toggle-row{display:flex;justify-content:space-between;align-items:center;padding:.65rem 0;border-bottom:1px solid rgba(212,165,165,.1)}
+.toggle{width:46px;height:26px;background:rgba(250,246,241,.15);border-radius:13px;position:relative;cursor:pointer}
+.toggle.on{background:var(--red)}
+.toggle::after{content:'';position:absolute;width:20px;height:20px;background:#fff;border-radius:50%;top:3px;left:3px;transition:.2s}
+.toggle.on::after{left:23px}
+.btn-row{display:flex;gap:.7rem;margin-top:.8rem}
+.btn-row .btn{flex:1}
+</style>
+</head>
+<body>
+<div id="s-start" class="screen active">
+  <div class="logo">Mezi námi</div>
+  <p class="subtitle">Romantická hra pro dva dospělé</p>
+  <div class="card">
+    <div class="input-group"><label>Jméno dívky</label><input id="nameG" maxlength="20" placeholder="např. Anička"/></div>
+    <div class="input-group"><label>Jméno chlapce</label><input id="nameB" maxlength="20" placeholder="např. Petr"/></div>
+    <div class="input-group"><label>Režim</label><div class="chip-group" id="modes"></div></div>
+    <div class="input-group"><label>Intenzita</label><div class="chip-group" id="ints"></div></div>
+    <button class="btn btn-primary" id="btnStart" style="margin-top:.8rem">Začít hru</button>
+    <div class="footer-links">
+      <button id="btnRules">Pravidla</button>
+      <button id="btnCustom">Vlastní</button>
+      <button id="btnSet">Nastavení</button>
+    </div>
+  </div>
+  <p class="age-note">18+ · Každou výzvu lze kdykoli odmítnout bez trestu.</p>
+</div>
+
+<div id="s-game" class="screen">
+  <div class="player-badge"><div class="role" id="role">Na řadě</div><div class="name" id="pname">—</div></div>
+  <div id="choice">
+    <p style="text-align:center;color:var(--pink);font-size:.88rem">Vyber si</p>
+    <div class="choice-buttons">
+      <button class="choice-btn" id="btnT">Pravda</button>
+      <button class="choice-btn" id="btnD">Úkol</button>
+    </div>
+    <button class="btn btn-secondary" id="btnR">Losovat</button>
+  </div>
+  <div id="cardA" style="display:none">
+    <div class="card-reveal"><div class="card-meta" id="cmeta"></div><div class="card-text" id="ctext"></div></div>
+    <div class="btn-row"><button class="btn btn-primary" id="btnDone">Splněno</button><button class="btn btn-secondary" id="btnSkip">Přeskočit</button></div>
+    <button class="btn btn-ghost" id="btnAnother">Jiná výzva</button>
+  </div>
+  <div class="stats-bar"><span>Tahy: <b id="stT">0</b></span><span>Splněno: <b id="stD">0</b></span><span>Přeskočeno: <b id="stS">0</b></span></div>
+  <div class="footer-links"><button id="btnEnd">Ukončit</button><button id="btnInt">Intenzita</button></div>
+</div>
+
+<div id="s-sum" class="screen">
+  <div class="logo" style="font-size:2rem">Konec hry</div>
+  <div class="card" style="margin-top:1.4rem;text-align:center">
+    <p style="color:var(--pink);margin-bottom:1rem">Děkujeme za hru.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.2rem 0">
+      <div><div style="font-size:1.7rem;color:var(--gold)" id="suT">0</div><div style="font-size:.75rem;color:var(--pink)">Tahů</div></div>
+      <div><div style="font-size:1.7rem;color:var(--gold)" id="suD">0</div><div style="font-size:.75rem;color:var(--pink)">Splněno</div></div>
+    </div>
+    <button class="btn btn-primary" id="btnNew">Nová hra</button>
+    <button class="btn btn-secondary" id="btnBack" style="margin-top:.6rem">Úvod</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="mRules"><div class="modal"><h2 style="color:var(--gold);margin-bottom:.8rem">Pravidla & soukromí</h2><p style="font-size:.88rem;margin-bottom:.6rem">Hra je pro dospělé 18+. Oba mohou kdykoli odmítnout jakoukoli výzvu bez trestu.</p><p style="font-size:.88rem;margin-bottom:.6rem">Žádná data se neodesílají. Vlastní obsah zůstává jen ve vašem zařízení.</p><button class="btn btn-primary" data-c="mRules">Zavřít</button></div></div>
+<div class="modal-overlay" id="mSet"><div class="modal"><h2 style="color:var(--gold);margin-bottom:.8rem">Nastavení</h2><div class="toggle-row"><span>Zvuky</span><div class="toggle" id="tSound"></div></div><div class="toggle-row"><span>Časovač</span><div class="toggle" id="tTimer"></div></div><button class="btn btn-primary" style="margin-top:1rem" data-c="mSet">Hotovo</button></div></div>
+<div class="modal-overlay" id="mCustom"><div class="modal"><h2 style="color:var(--gold);margin-bottom:.8rem">Vlastní obsah</h2><div class="input-group"><label>Typ</label><select id="cType"><option value="truth">Pravda</option><option value="dare">Úkol</option></select></div><div class="input-group"><label>Text</label><input id="cText" maxlength="280" placeholder="Text výzvy…"/></div><div class="input-group"><label>Kategorie</label><select id="cCat"><option value="romantika">Romantika</option><option value="flirt">Flirt</option><option value="humor">Humor</option><option value="partnersky">Partnerský</option><option value="18plus">18+</option></select></div><div class="input-group"><label>Intenzita</label><select id="cInt"><option value="1">Lehká</option><option value="2">Střední</option><option value="3">Odvážná</option><option value="4">Intenzivní</option></select></div><button class="btn btn-primary" id="btnAdd">Přidat</button><div id="cList" style="margin-top:1rem;max-height:180px;overflow-y:auto;font-size:.82rem"></div><button class="btn btn-secondary" style="margin-top:.8rem" data-c="mCustom">Zavřít</button></div></div>
+<div class="modal-overlay" id="mInt"><div class="modal"><h2 style="color:var(--gold);margin-bottom:.8rem">Intenzita</h2><div class="chip-group" id="intsLive"></div><button class="btn btn-primary" style="margin-top:1rem" data-c="mInt">Hotovo</button></div></div>
+
 <script>
-const C=[['romance','Romantika'],['flirt','Flirtování'],['confession','Osobní přiznání'],['attraction','Sympatie a přitažlivost'],['trust','Vztahy a důvěra'],['humor','Humor a trapasy'],['creative','Kreativita'],['communication','Komunikace'],['sensual','Smyslnost'],['boundaries','Hranice a souhlas'],['touch','Doteky a smysly'],['jealousy','Žárlivost'],['sexuality','Intimita a sexualita']];
-const M=[['romantic','Romantika','Flirt a milá gesta',['romance','flirt','attraction','confession']],['fun','Zábava','Humor a kreativita',['humor','creative']],['bold','Odvážné výzvy','Osobnější témata a důvěra',['confession','attraction','trust','communication']],['relationship','Partnerský režim','Poznávání a komunikace',['romance','confession','trust','communication','attraction']],['adult','SPICY · smyslnost','Odvážné otázky, dotekové hranice a blízkost',['sensual','flirt','communication','boundaries','touch','jealousy','sexuality','attraction','confession']],['mix','Náhodný mix','Kombinace povolených témat',C.map(x=>x[0])]];
-const subjects=['první dojem','ideální společný večer','nejmilejší zpráva','nečekaný kompliment','společný výlet','oblíbená vzpomínka','malé každodenní gesto','důvěra','vzájemná podpora','smysl pro humor','osobní hranice','romantická atmosféra','upřímný rozhovor','odvaha být sám sebou','společný sen','oblíbená vlastnost','trapný okamžik','překvapení','pocit bezpečí','přitažlivost','ideální rande','životní hodnota','tajný talent','dětská vzpomínka','představa budoucnosti'];
-const Q=['Co pro tebe znamená téma {x}?','Kdy sis naposledy uvědomil, jak důležité je pro tebe {x}?','Jak bys popsal svůj ideál, pokud jde o {x}?','Co tě na tématu {x} dokáže nejvíc překvapit?','Jakou zkušenost s tématem {x} by ses chtěl podělit?','Co bys chtěl, aby o tvém pohledu na {x} druhý věděl?','Jak by se dalo {x} ještě zlepšit?','Jaká maličkost ti připomíná {x}?','Která hranice je pro tebe u tématu {x} důležitá?','Jakou otázku bys druhému položil o tématu {x}?'];
-const D=['Popiš svůj ideál pro téma {x} ve třech větách.','Vymysli krátkou scénku, ve které hraje hlavní roli {x}.','Polož druhému otevřenou otázku o tématu {x} a pozorně vyslechni odpověď.','Vymysli originální kompliment inspirovaný tématem {x}.','Každý řekněte jednu věc, kterou byste chtěli o tématu {x} lépe pochopit.','Zahraj deset sekund beze slov, jak si představuješ {x}.','Vymysli název filmu, jehož tématem je {x}, a vysvětli proč.','Navrhni drobné společné gesto spojené s tématem {x}; oba ho můžete odmítnout.','Řekni druhému pozitivní myšlenku, kterou v tobě vyvolává {x}.','Vymysli tři slova, která nejlépe vystihují {x}.'];
-const data={truth:[],dare:[]};let n=0;for(let i=0;i<250;i++){let s=subjects[i%25],j=Math.floor(i/25),cat=C[(i*7+j)%C.length][0];data.truth.push({id:'t'+i,type:'truth',text:Q[j%Q.length].replace('{x}',s)+(j>=Q.length?' — a proč právě to?':''),category:cat,level:1+(i%4),mix:true});data.dare.push({id:'d'+i,type:'dare',text:D[j%D.length].replace('{x}',s)+(j>=D.length?' a potom vysvětli svůj nápad.':''),category:C[(i*5+j)%C.length][0],level:1+((i+1)%4),mix:true})}
-const boldTruths=[
-['flirt','Který můj pohled nebo úsměv by tě nejspíš rozhodil?'],
-['attraction','Jaká vlastnost člověka tě přitahuje víc, než bys čekal/a?'],
-['confession','Jaký kompliment by sis tajně přál/a slyšet právě ode mě?'],
-['romance','Jak by vypadalo rande, po kterém bys ještě dlouho nemohl/a usnout — protože bys na něj vzpomínal/a?'],
-['trust','Co je odvážné přiznat, když se ti někdo opravdu líbí?'],
-['flirt','Co je nejodvážnější zpráva, kterou by ses odvážil/a poslat někomu, kdo se ti líbí?'],
-['attraction','Co tě na někom zaujme jako první a co tě udrží déle?'],
-['confession','Kdy jsi naposledy předstíral/a, že jsi v pohodě, i když jsi byl/a nervózní kvůli někomu, kdo se ti líbí?'],
-['romance','Jaké malé romantické gesto by tě úplně odzbrojilo?'],
-['communication','Jak poznám, že se ti někdo líbí, i když to neřekneš nahlas?'],
-['flirt','Jaký typ flirtování tě rozesměje a zároveň znervózní?'],
-['trust','Jakou hranici by měl druhý člověk znát, aby ses cítil/a bezpečně?'],
-['attraction','Co je na tvém ideálním protějšku překvapivě nečekané?'],
-['confession','Jaké tajemství o svých sympatiích bys normálně neřekl/a jako první?'],
-['romance','Kdybys mi měl/a naplánovat dokonalý večer, jaké tři věci by v něm byly?'],
-['flirt','Jaká věta by tě přiměla zčervenat, i kdyby byla řečená úplně nevinně?'],
-['communication','Co bys chtěl/a, abych se tě zeptal/a, ale sám/sama to nezačneš?'],
-['attraction','Jaká drobnost na chování druhého člověka ti připadá neodolatelně sympatická?'],
-['confession','Kdy ses naposledy snažil/a udělat dojem na někoho, kdo se ti líbil?'],
-['romance','Jaký okamžik bys chtěl/a zažít ve filmové romantické scéně — bez filmových klišé?']
+const MODES=[{id:"romantika",l:"Romantika"},{id:"zábava",l:"Zábava"},{id:"odvážné",l:"Odvážné"},{id:"partnersky",l:"Partnerský"},{id:"18plus",l:"18+"},{id:"mix",l:"Mix"}];
+const INTS=[{id:1,l:"Lehká"},{id:2,l:"Střední"},{id:3,l:"Odvážná"},{id:4,l:"Intenzivní"}];
+const RAW=[
+{id:"t1",type:"truth",text:"Co na mě na první pohled nejvíc zaujalo?",cat:"romantika",int:1,m:["romantika","mix"]},
+{id:"t2",type:"truth",text:"Jaký je tvůj nejoblíbenější způsob, jak trávit společný večer?",cat:"romantika",int:1,m:["romantika","mix"]},
+{id:"t3",type:"truth",text:"Jaký kompliment bys mi chtěl/a říct právě teď?",cat:"flirt",int:1,m:["flirt","mix"]},
+{id:"t4",type:"truth",text:"Co bys na mně nejraději změnil/a a co bys nikdy neměnil/a?",cat:"partnersky",int:2,m:["partnersky","mix"]},
+{id:"t5",type:"truth",text:"Jaká je tvoje nejoblíbenější vzpomínka na nás dva?",cat:"romantika",int:1,m:["romantika","mix"]},
+{id:"t6",type:"truth",text:"Co tě na mně nejvíc přitahuje fyzicky?",cat:"flirt",int:2,m:["flirt","18plus","mix"]},
+{id:"t7",type:"truth",text:"Už jsi někdy měl/a sen o mně? O čem byl?",cat:"flirt",int:2,m:["flirt","mix"]},
+{id:"t8",type:"truth",text:"Jaký je tvůj největší vztahový strach?",cat:"partnersky",int:2,m:["partnersky","mix"]},
+{id:"t9",type:"truth",text:"Co bys chtěl/a, abych ti častěji říkal/a?",cat:"partnersky",int:1,m:["partnersky","mix"]},
+{id:"t10",type:"truth",text:"Jaký je tvůj nejoblíbenější film o lásce?",cat:"romantika",int:1,m:["romantika","mix"]},
+{id:"t11",type:"truth",text:"Co tě nejvíc rozesmívá na mně?",cat:"humor",int:1,m:["zábava","mix"]},
+{id:"t12",type:"truth",text:"Jaký trapný moment ze seznámení si pamatuješ?",cat:"humor",int:1,m:["zábava","mix"]},
+{id:"t13",type:"truth",text:"Co bys dělal/a, kdybys měl/a celý den jen pro nás?",cat:"romantika",int:1,m:["romantika","mix"]},
+{id:"t14",type:"truth",text:"Jaký je tvůj ideální rande?",cat:"romantika",int:1,m:["romantika","mix"]},
+{id:"t15",type:"truth",text:"Co na mně obdivuješ mimo vzhled?",cat:"partnersky",int:1,m:["partnersky","mix"]},
+{id:"t16",type:"truth",text:"Jak bys popsal/a naši chemii jednou větou?",cat:"flirt",int:2,m:["flirt","mix"]},
+{id:"t17",type:"truth",text:"Už jsi někdy žárlil/a? Na co?",cat:"partnersky",int:2,m:["partnersky","mix"]},
+{id:"t18",type:"truth",text:"Jaký je tvůj nejoblíbenější způsob vyjádření náklonnosti?",cat:"romantika",int:1,m:["romantika","mix"]},
+{id:"t19",type:"truth",text:"Co bys chtěl/a se mnou zkusit, ale ještě jsi to nenavrhl/a?",cat:"flirt",int:2,m:["flirt","odvážné","mix"]},
+{id:"t20",type:"truth",text:"Jaký je tvůj největší sen ohledně našeho vztahu?",cat:"partnersky",int:2,m:["partnersky","mix"]},
+{id:"t21",type:"truth",text:"Co bys chtěl/a, abych ti udělal/a právě teď, kdybychom byli sami?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t22",type:"truth",text:"Které místo na mém těle bys chtěl/a políbit jako první?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t23",type:"truth",text:"Jaký je tvůj nejoblíbenější typ dirty talku?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t24",type:"truth",text:"Už jsi někdy měl/a erotický sen o někom z přítomných?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t25",type:"truth",text:"Co tě nejvíc vzrušuje, když se na tebe někdo dívá?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t26",type:"truth",text:"Jaký je tvůj nejoblíbenější způsob, jak být líbán/a na krku?",cat:"smyslnost",int:2,m:["18plus","mix"]},
+{id:"t27",type:"truth",text:"Co bys chtěl/a zkusit v posteli, ale ještě jsi to nikomu neřekl/a?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t28",type:"truth",text:"Které prádlo na sobě teď nosíš a jak bys chtěl/a, abych ho sundal/a?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t29",type:"truth",text:"Co tě nejvíc dráždí, když ti někdo šeptá do ucha?",cat:"smyslnost",int:2,m:["18plus","mix"]},
+{id:"t30",type:"truth",text:"Jaký je tvůj tajný kink, o kterém skoro nikdo neví?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t31",type:"truth",text:"Co tě nejvíc vzrušuje na tom, když tě někdo drží?",cat:"smyslnost",int:2,m:["18plus","mix"]},
+{id:"t32",type:"truth",text:"Jaký je tvůj nejoblíbenější typ prádla na partnerovi?",cat:"18plus",int:2,m:["18plus","mix"]},
+{id:"t33",type:"truth",text:"Už jsi někdy měl/a sex na místě, kde jste mohli být přistiženi?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t34",type:"truth",text:"Co bys chtěl/a zkusit s vibrátorem nebo hračkou?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t35",type:"truth",text:"Jaký je tvůj nejoblíbenější způsob, jak dostat orální pozornost?",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"t36",type:"truth",text:"Už jsi někdy poslal/a někomu intimní fotku? Jak se to cítilo?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t37",type:"truth",text:"Co bys chtěl/a, abych ti řekl/a během intimního momentu?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"t38",type:"truth",text:"Které místo na tvém těle je nejcitlivější?",cat:"smyslnost",int:2,m:["18plus","mix"]},
+{id:"t39",type:"truth",text:"Jaký je tvůj nejoblíbenější typ polibku?",cat:"smyslnost",int:2,m:["18plus","mix"]},
+{id:"t40",type:"truth",text:"Co tě nejvíc vzrušuje na pomalém svlékání?",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d1",type:"dare",text:"Pohlaď partnerovi/partnerce tvář a řekni jeden upřímný kompliment.",cat:"romantika",int:1,m:["romantika","mix"]},
+{id:"d2",type:"dare",text:"Podrž partnerovi/partnerce ruku 30 sekund a podívej se mu/jí do očí.",cat:"romantika",int:1,m:["romantika","mix"]},
+{id:"d3",type:"dare",text:"Řekni partnerovi/partnerce tři věci, které na něm/ní obdivuješ.",cat:"partnersky",int:1,m:["partnersky","mix"]},
+{id:"d4",type:"dare",text:"Udělej partnerovi/partnerce 20 sekundovou masáž ramen.",cat:"romantika",int:1,m:["romantika","mix"]},
+{id:"d5",type:"dare",text:"Polib partnerovi/partnerce ruku.",cat:"romantika",int:1,m:["romantika","mix"]},
+{id:"d6",type:"dare",text:"Řekni partnerovi/partnerce, jak by vypadalo tvé ideální rande s ním/ní.",cat:"romantika",int:1,m:["romantika","mix"]},
+{id:"d7",type:"dare",text:"Zavři oči a nech partnera/partnerku, ať ti 15 sekund šeptá do ucha cokoliv chce.",cat:"flirt",int:2,m:["flirt","mix"]},
+{id:"d8",type:"dare",text:"Tanči s partnerem/partnerkou 30 sekund bez hudby.",cat:"romantika",int:1,m:["romantika","zábava","mix"]},
+{id:"d9",type:"dare",text:"Řekni partnerovi/partnerce vtip, který ho/ji rozesměje.",cat:"humor",int:1,m:["zábava","mix"]},
+{id:"d10",type:"dare",text:"Napodob partnera/partnerku 20 sekund.",cat:"humor",int:1,m:["zábava","mix"]},
+{id:"d11",type:"dare",text:"Pohlaď partnerovi/partnerce vlasy a řekni, co se ti na nich líbí.",cat:"flirt",int:2,m:["flirt","mix"]},
+{id:"d12",type:"dare",text:"Podrž partnerovi/partnerce obličej v dlaních a podívej se mu/jí do očí 10 sekund.",cat:"romantika",int:2,m:["romantika","mix"]},
+{id:"d13",type:"dare",text:"Udělej partnerovi/partnerce 30 sekundovou masáž rukou.",cat:"romantika",int:1,m:["romantika","mix"]},
+{id:"d14",type:"dare",text:"Polib partnerovi/partnerce krk (se souhlasem).",cat:"smyslnost",int:2,m:["18plus","mix"]},
+{id:"d15",type:"dare",text:"Šeptni partnerovi/partnerce do ucha něco smyslného.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d16",type:"dare",text:"Pohlaď partnerovi/partnerce vnitřní stranu stehna (přes oblečení, se souhlasem).",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d17",type:"dare",text:"Řekni partnerovi/partnerce, které místo na jeho/jejím těle bys chtěl/a políbit jako další.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d18",type:"dare",text:"Nech partnera/partnerku, ať ti 15 sekund líbá krk.",cat:"smyslnost",int:2,m:["18plus","mix"]},
+{id:"d19",type:"dare",text:"Popiš partnerovi/partnerce, co bys chtěl/a, aby ti udělal/a právě teď (pouze slovně).",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d20",type:"dare",text:"Polib partnerovi/partnerce na rty alespoň 5 sekund (se souhlasem).",cat:"smyslnost",int:2,m:["18plus","mix"]},
+{id:"d21",type:"dare",text:"Řekni partnerovi/partnerce svůj nejoblíbenější dirty talk a použij ho teď.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d22",type:"dare",text:"Pohlaď partnerovi/partnerce po zádech pod tričkem (se souhlasem).",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d23",type:"dare",text:"Nech partnera/partnerku, ať ti sundá jeden kousek oblečení (volitelně).",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d24",type:"dare",text:"Šeptni partnerovi/partnerce, co bys chtěl/a, aby ti udělal/a jazykem.",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"d25",type:"dare",text:"Pohlaď partnerovi/partnerce bradavku přes oblečení (se souhlasem).",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d26",type:"dare",text:"Řekni partnerovi/partnerce, jak bys chtěl/a, aby tě líbal/a mezi nohama.",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"d27",type:"dare",text:"Nech partnera/partnerku, ať ti 20 sekund masíruje stehna.",cat:"smyslnost",int:2,m:["18plus","mix"]},
+{id:"d28",type:"dare",text:"Popiš partnerovi/partnerce svůj nejoblíbenější způsob, jak dostat orgasmus.",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"d29",type:"dare",text:"Polib partnerovi/partnerce břicho (se souhlasem).",cat:"smyslnost",int:2,m:["18plus","mix"]},
+{id:"d30",type:"dare",text:"Řekni partnerovi/partnerce, které prádlo bys na něm/ní chtěl/a vidět.",cat:"18plus",int:2,m:["18plus","mix"]},
+{id:"d31",type:"dare",text:"Nech partnera/partnerku, ať ti 15 sekund drží za krk (jemně, se souhlasem).",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d32",type:"dare",text:"Šeptni partnerovi/partnerce svůj tajný kink.",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"d33",type:"dare",text:"Pohlaď partnerovi/partnerce zadek (se souhlasem).",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d34",type:"dare",text:"Řekni partnerovi/partnerce, co bys chtěl/a zkusit v posteli dnes večer.",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d35",type:"dare",text:"Nech partnera/partnerku, ať ti 10 sekund líbá ucho.",cat:"smyslnost",int:2,m:["18plus","mix"]},
+{id:"d36",type:"dare",text:"Popiš partnerovi/partnerce, jak by vypadala vaše společná intimní fantazie.",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"d37",type:"dare",text:"Pohlaď partnerovi/partnerce vnitřní stranu stehna nahoru (přes oblečení, se souhlasem).",cat:"18plus",int:3,m:["18plus","mix"]},
+{id:"d38",type:"dare",text:"Řekni partnerovi/partnerce, jak bys chtěl/a, aby tě spoutal/a (pokud souhlasí).",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"d39",type:"dare",text:"Šeptni partnerovi/partnerce, co bys chtěl/a, aby ti udělal/a s prsty.",cat:"18plus",int:4,m:["18plus","mix"]},
+{id:"d40",type:"dare",text:"Pohlaď partnerovi/partnerce po celém těle (přes oblečení) 20 sekund.",cat:"smyslnost",int:2,m:["18plus","mix"]}
 ];
-const spicyTruths=[
-['sexuality','Co pro tebe znamená zdravá intimita ve vztahu?'],['sexuality','Jak se dá citlivě mluvit o přáních, aniž by druhý cítil tlak?'],['sexuality','Které téma o blízkosti se ti těžko otevírá a co by ti pomohlo?'],['sexuality','Co podle tebe odlišuje přitažlivost od skutečné důvěry?'],['sexuality','Jak poznáš, že je správná chvíle mluvit o osobních hranicích?'],['boundaries','Jaký dotek je pro tebe v běžném životě příjemný a jaký už ne?'],['boundaries','Jak bys chtěl/a, aby druhý reagoval, když řekneš „teď ne“?'],['boundaries','Jak se dá ověřit souhlas, aniž by to působilo nepřirozeně?'],['boundaries','Co je pro tebe jasný signál, že je potřeba zpomalit?'],['boundaries','Kterou hranici by měl znát každý, kdo se ti chce přiblížit?'],['touch','Které neintimní smyslové zážitky máš nejraději — teplo, měkký materiál, vůni nebo hudbu?'],['touch','Je ti příjemnější držení za ruku, objetí, nebo raději žádný dotek? Odpověď může být „záleží“.'],['touch','Jaký jednoduchý dotek, například plácnutí dlaní, ti připadá přátelský a bezpečný?'],['touch','Jak bys druhému řekl/a, že chceš nejdřív požádat o svolení k objetí?'],['touch','Jakou věc s příjemnou texturou bys chtěl/a zkusit poznat jen hmatem?'],['jealousy','Co by v tobě mohlo vyvolat žárlivost, i když víš, že druhému můžeš důvěřovat?'],['jealousy','Jak bys chtěl/a, aby partner reagoval, když se cítíš nejistě?'],['jealousy','Kde je podle tebe hranice mezi žárlivostí a kontrolováním?'],['jealousy','Co ti pomáhá cítit se ve vztahu jistě, aniž by někdo musel dokazovat, kde je?'],['jealousy','Jak bys otevřel/a rozhovor o žárlivosti bez obviňování?']
-];
-const boldDares=[
-['flirt','Dívej se druhému 10 sekund do očí; kdokoliv může kdykoliv uhnout nebo úkol přeskočit.'],
-['attraction','Řekni druhému tři konkrétní věci, které na něm oceňuješ — žádné obecné fráze.'],
-['romance','Vymysli během 30 sekund pozvánku na rande, která je originální a trochu drzá.'],
-['confession','Doplň větu: „Trochu mě znervózňuje, když ty…“ — jen pokud se na to cítíš.'],
-['flirt','Vymysli nejhladší, ale ne trapnou balicí hlášku a řekni ji s naprostou vážností.'],
-['romance','Popiš dokonalé rande tak, jako bys prodával/a trailer k romantickému filmu.'],
-['communication','Polož druhému jednu odvážnou, ale respektující otázku a pozorně vyslechni odpověď.'],
-['attraction','Vyber jednu vlastnost druhého, které sis všiml/a až dnes, a řekni mu ji.'],
-['flirt','Řekni kompliment tak, aby zněl jako tajemství, které už dál nemůžeš držet.'],
-['romance','Vymysli pro vás dva přezdívku jako pro dvojici v romantické komedii.'],
-['confession','Dokonči: „Kdybych měl/a odvahu, pozval/a bych tě na…“ — můžeš zvolit i smyšlenou odpověď.'],
-['flirt','Zahraj 10 sekund scénu prvního setkání, ve které se snažíš zapůsobit.'],
-['attraction','Vyber píseň, která by hrála při vašem filmovém setkání, a vysvětli proč.'],
-['romance','Navrhni drobné romantické gesto, které nestojí peníze, a předveď ho slovy.'],
-['communication','Řekni jednu věc, díky které se vedle druhého člověka cítíš dobře.'],
-['flirt','Řekni „mám pro tebe přiznání“ a pak sdílej neškodné, upřímné přiznání.'],
-['romance','Vymysli pozvánku na rande v maximálně sedmi slovech.'],
-['confession','Pověz, jaký první dojem na tebe druhý udělal — laskavě a upřímně.'],
-['attraction','Předveď svůj nejvíc sebevědomý nástup do místnosti po dobu pěti sekund.'],
-['flirt','Zkus druhého rozesmát jedním svým nejlepším flirtovacím pokusem.']
-];
-for(const [type,bank] of [['truth',boldTruths],['truth',spicyTruths],['dare',boldDares]]) bank.forEach((x,i)=>data[type].push({id:'spicy-'+type+'-'+i+'-'+x[0],type,text:x[1],category:x[0],level:3+(i%2),mix:true}));
-const tactileDares=[['touch','Nejdřív se zeptej, zda je druhému příjemné plácnutí dlaní. Pokud oba souhlasíte, dejte si high-five; jinak vyberte jiný úkol.'],['touch','Polož na stůl dvě bezpečné věci s různou texturou a nechte druhého jednu poznat hmatem se zavřenýma očima.'],['touch','Nabídni držení za ruku na pět sekund — pouze po jasném „ano“. Odmítnutí znamená okamžitě zvolit jiný úkol.'],['touch','Zeptej se, jestli by druhému bylo příjemné objetí. Přijmi odpověď bez přesvědčování; obejmout se nemusíte.'],['touch','Každý si vybere vlastní příjemný předmět a popíše jeho texturu třemi slovy.'],['touch','Nakresli prstem do vzduchu jednoduchý tvar a nech druhého hádat, co to je. Žádný dotek těla není potřeba.'],['boundaries','Nacvičte si větu „Můžu tě obejmout?“ a dvě respektující reakce: „ano“ i „ne, díky“.'],['boundaries','Každý řekněte jednu věc, na kterou se má druhý před dotykem zeptat. Lze odpovědět „nechci sdílet“.'],['boundaries','Vymysli laskavou větu, kterou lze použít, když někdo chce zpomalit nebo změnit úkol.'],['boundaries','Vyberte si signál pro pauzu a potvrďte, že po jeho použití se okamžitě zastavíte.'],['sexuality','Vymysli tři otázky, které pomáhají párům bezpečně mluvit o hranicích a vzájemném respektu.'],['sexuality','Doplň větu: „Ve zdravém vztahu by oba měli mít možnost…“'],['jealousy','Zahraj krátkou scénku, jak klidně říct „cítil/a jsem žárlivost a chtěl/a bych si o tom promluvit“.'],['jealousy','Řekni jednu věc, která posiluje důvěru, a jednu věc, která ji může narušit.'],['sensual','Vyberte příjemnou vůni nebo hudbu v místnosti a každý popište, jakou náladu ve vás vyvolává.']];
-tactileDares.forEach((x,i)=>data.dare.push({id:'spicy-touch-'+i,type:'dare',text:x[1],category:x[0],level:3+(i%2),mix:true}));
-const $=id=>document.getElementById(id);let mode='romantic',level=2,disabled=new Set(),custom=[],players=['',''],active=0,turns=0,done=0,skipped=0,current=null,sfx=false,timerId=null;
-try{custom=JSON.parse(localStorage.getItem('mezi-nami-custom')||'[]');if(!Array.isArray(custom))custom=[]}catch{custom=[]}
-function persist(){try{localStorage.setItem('mezi-nami-custom',JSON.stringify(custom))}catch{alert('Uložení není v tomto prohlížeči dostupné.')}renderList()}
-function all(){return [...data.truth,...data.dare,...custom]}
-function modeCats(){return M.find(x=>x[0]===mode)[3]}
-function catName(id){return (C.find(c=>c[0]===id)||['','Vlastní'])[1]}
-function show(id){['home','game','custom','summary'].forEach(s=>$(s).classList.toggle('hidden',s!==id));window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
-function beep(f=440){if(!sfx)return;try{let A=window.AudioContext||window.webkitAudioContext,c=new A,o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=f;g.gain.value=.035;g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.12);o.start();o.stop(c.currentTime+.13);o.onended=()=>c.close()}catch{}}
-function renderCounters(){const label='Na řadě je '+players[active];$('turn').textContent=label;$('turnSticky').textContent=label;$('turns').textContent=turns;$('done').textContent=done;$('skipped').textContent=skipped}
-function clearTimer(){clearInterval(timerId);timerId=null}
-function resetTimer(){clearTimer();let sec=Number($('timer').value);if(!sec)return;let left=sec;timerId=setInterval(()=>{left--;if(left<=0){clearTimer();if(confirm('Čas vypršel. Chceš pokračovat? Zrušit znamená přeskočit.')){}else skip()}},1000)}
-function get(type){let pool=all().filter(x=>x.type===type&&x.level<=level&&modeCats().includes(x.category)&&!disabled.has(x.category)&&(mode!=='mix'||x.mix!==false));if(!pool.length){alert('Pro toto nastavení není další výzva. Povolte kategorii nebo změňte intenzitu.');return}let next=pool.filter(x=>x.id!==current?.id);current=(next.length?next:pool)[Math.floor(Math.random()*(next.length?next:pool).length)];$('choose').classList.add('hidden');$('current').classList.remove('hidden');$('type').textContent=(type==='truth'?'PRAVDA':'ÚKOL')+' · '+catName(current.category);$('text').textContent=current.text;$('meta').textContent='Intenzita '+['','lehká','střední','odvážná','intenzivní'][current.level]+' · Výzvu lze odmítnout.';beep(520);resetTimer()}
-function chooser(){clearTimer();current=null;$('current').classList.add('hidden');$('choose').classList.remove('hidden');renderCounters()}
-function finish(ok){clearTimer();if(ok)done++;else skipped++;turns++;active=1-active;beep(ok?660:390);chooser()}
-function start(){let a=$('p1').value.trim(),b=$('p2').value.trim();if(!a||!b){alert('Vyplňte jména obou hráčů.');return}if(!$('adult').checked){alert('Oba hráči musí potvrdit věk 18+ a souhlas s pravidly.');return}if(!modeCats().some(c=>!disabled.has(c))){alert('Povolte alespoň jednu kategorii.');return}players=[a.slice(0,32),b.slice(0,32)];active=$('start').value==='r'?Math.floor(Math.random()*2):Number($('start').value);turns=done=skipped=0;sfx=$('sound').checked;show('game');chooser()}
-function end(){clearTimer();$('st').textContent=turns;$('sd').textContent=done;$('ss').textContent=skipped;$('summaryText').textContent=players.join(' a ')+', děkujeme za společný čas. Hrajte vždy podle vlastních hranic.';show('summary');turns=done=skipped=0;current=null}
-function renderList(){$('list').innerHTML=custom.length?custom.map(x=>'<div class="item"><b>'+ (x.type==='truth'?'Pravda':'Úkol')+' · '+catName(x.category)+'</b><p>'+safe(x.text)+'</p><small>Intenzita '+x.level+' · '+(x.mix?'V náhodném mixu':'Jen seznam')+'</small> <button data-del="'+x.id+'">Smazat</button></div>').join(''):'<p class="muted">Zatím tu nejsou vlastní výzvy.</p>'}
-function safe(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-$('modes').innerHTML=M.map((m,i)=>'<button class="mode '+(i===0?'selected':'')+'" data-mode="'+m[0]+'"><b>'+m[1]+'</b><small>'+m[2]+'</small></button>').join('');$('cats').innerHTML=C.map(c=>'<button class="chip" data-cat="'+c[0]+'" aria-pressed="true">'+c[1]+'</button>').join('');$('cc').innerHTML=C.map(c=>'<option value="'+c[0]+'">'+c[1]+'</option>').join('');
-document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;document.querySelectorAll('[data-mode]').forEach(x=>x.classList.toggle('selected',x===b))});
-document.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{level=+b.dataset.l;document.querySelectorAll('[data-l]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)))});
-$('cats').onclick=e=>{let b=e.target.closest('[data-cat]');if(!b)return;let c=b.dataset.cat;disabled.has(c)?disabled.delete(c):disabled.add(c);b.setAttribute('aria-pressed',String(!disabled.has(c)))};
-$('startBtn').onclick=start;$('truth').onclick=()=>get('truth');$('dare').onclick=()=>get('dare');$('roulette').onclick=()=>get(Math.random()<.5?'truth':'dare');$('complete').onclick=()=>finish(true);$('skip').onclick=()=>{if(!current)return;skipped++;beep(390);get(current.type);renderCounters()};$('another').onclick=()=>current&&get(current.type);$('back').onclick=chooser;$('end').onclick=end;$('settings').onclick=()=>{show('home');$('p1').value=players[0];$('p2').value=players[1];$('adult').checked=true};$('new').onclick=()=>show('home');$('manageBtn').onclick=()=>{show('custom');renderList()};$('sumCustom').onclick=()=>{show('custom');renderList()};$('homeBtn').onclick=()=>show('home');$('save').onclick=()=>{let text=$('cText').value.trim();if(!text){alert('Napište text výzvy.');return}custom.push({id:'c'+Date.now()+Math.random(),type:$('ct').value,text,category:$('cc').value,level:+$('cl').value,mix:$('cm').value==='true'});$('cText').value='';persist()};$('list').onclick=e=>{let b=e.target.closest('[data-del]');if(b){custom=custom.filter(x=>x.id!==b.dataset.del);persist()}};$('clear').onclick=()=>{if(confirm('Smazat všechny vlastní položky uložené v tomto zařízení?')){custom=[];persist()}};$('rules').onclick=()=>$('modal').classList.remove('hidden');$('close').onclick=()=>$('modal').classList.add('hidden');$('modal').onclick=e=>{if(e.target===$('modal'))$('modal').classList.add('hidden')};document.addEventListener('keydown',e=>{if(e.key==='Escape')$('modal').classList.add('hidden')});renderList();
-</script></body></html>
+const ITEMS=[...RAW];
+for(let i=0;i<60;i++){
+  ITEMS.push({id:"tx"+i,type:"truth",text:"Co bys chtěl/a, abych ti častěji říkal/a o "+["polibcích","mazlení","rande","intimním momentu","flirtování","důvěře","přitažlivosti","fantaziích","společné noci","komunikaci"][i%10]+"?",cat:i%3===0?"18plus":"romantika",int:(i%4)+1,m:["mix","romantika","18plus"]});
+  ITEMS.push({id:"dx"+i,type:"dare",text:"Řekni partnerovi/partnerce tři věci o "+["polibku","mazlení","komplimentu","doteku","dirty talku","masáži","šeptání","držení","líbání krku","pohlazení"][i%10]+" a pohlaď ho/ji při tom.",cat:i%3===0?"18plus":"romantika",int:(i%4)+1,m:["mix","romantika","18plus"]});
+}
+const state={girl:"",boy:"",mode:"romantika",int:2,sound:false,timer:false,activeG:true,turns:0,done:0,skip:0,card:null,used:new Set(),custom:JSON.parse(localStorage.getItem("mnCustom")||"[]")};
+const $=id=>document.getElementById(id);
+function show(n){["s-start","s-game","s-sum"].forEach(id=>$(id).classList.toggle("active",id===n));}
+function chips(el,list,sel,cb){el.innerHTML="";list.forEach(i=>{const b=document.createElement("button");b.type="button";b.className="chip"+(i.id===sel?" active":"");b.textContent=i.l;b.onclick=()=>cb(i.id);el.appendChild(b);});}
+function initC(){chips($("modes"),MODES,state.mode,v=>{state.mode=v;initC();});chips($("ints"),INTS,state.int,v=>{state.int=v;initC();});chips($("intsLive"),INTS,state.int,v=>{state.int=v;initC();});}
+function filter(type){const all=ITEMS.concat(state.custom);return all.filter(i=>{if(i.type!==type)return false;if(i.int>state.int)return false;if(state.mode==="mix")return true;if(i.m&&i.m.includes(state.mode))return true;if(i.cat===state.mode)return true;if(state.mode==="18plus"&&(i.cat==="18plus"||i.cat==="smyslnost"))return true;if(state.mode==="romantika"&&(i.cat==="romantika"||i.cat==="flirt"))return true;if(state.mode==="zábava"&&(i.cat==="humor"||i.cat==="zábava"))return true;if(state.mode==="partnersky"&&(i.cat==="partnersky"||i.cat==="osobni"))return true;return false;});}
+function pick(type){let p=filter(type).filter(i=>!state.used.has(i.id));if(!p.length){state.used.clear();p=filter(type);}if(!p.length)return{id:"e",type,text:"Pro tuto kombinaci nemáme dost karet. Změň režim, intenzitu nebo přidej vlastní.",cat:"systém",int:1};const c=p[Math.floor(Math.random()*p.length)];state.used.add(c.id);return c;}
+function badge(){$("pname").textContent=state.activeG?state.girl:state.boy;$("role").textContent="Teď jsi na řadě · "+(state.activeG?"Dívka":"Chlapec");}
+function stats(){$("stT").textContent=state.turns;$("stD").textContent=state.done;$("stS").textContent=state.skip;}
+function choice(){$("choice").style.display="block";$("cardA").style.display="none";badge();stats();}
+function reveal(c){state.card=c;$("choice").style.display="none";$("cardA").style.display="block";$("cmeta").textContent=(c.type==="truth"?"Pravda":"Úkol")+" · "+(c.cat||"")+" · int. "+(c.int||"");$("ctext").textContent=c.text;}
+function next(){state.activeG=!state.activeG;state.turns++;choice();}
+$("btnStart").onclick=()=>{const g=$("nameG").value.trim(),b=$("nameB").value.trim();if(!g||!b)return alert("Vyplňte obě jména.");state.girl=g;state.boy=b;state.activeG=Math.random()<.5;state.turns=0;state.done=0;state.skip=0;state.used.clear();show("s-game");choice();};
+$("btnT").onclick=()=>reveal(pick("truth"));
+$("btnD").onclick=()=>reveal(pick("dare"));
+$("btnR").onclick=()=>{const t=Math.random()<.5?"truth":"dare";reveal(pick(t));};
+$("btnDone").onclick=()=>{state.done++;next();};
+$("btnSkip").onclick=()=>{state.skip++;choice();stats();};
+$("btnAnother").onclick=()=>{if(state.card)reveal(pick(state.card.type));};
+$("btnEnd").onclick=()=>{$("suT").textContent=state.turns;$("suD").textContent=state.done;show("s-sum");};
+$("btnNew").onclick=()=>show("s-start");
+$("btnBack").onclick=()=>show("s-start");
+$("btnInt").onclick=()=>$("mInt").classList.add("open");
+$("btnRules").onclick=()=>$("mRules").classList.add("open");
+$("btnSet").onclick=()=>$("mSet").classList.add("open");
+$("btnCustom").onclick=()=>{rC();$("mCustom").classList.add("open");};
+document.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>$(b.dataset.c).classList.remove("open"));
+function tog(id,k){const e=$(id);e.classList.toggle("on",state[k]);e.onclick=()=>{state[k]=!state[k];e.classList.toggle("on",state[k]);};}
+tog("tSound","sound");tog("tTimer","timer");
+function rC(){const l=$("cList");if(!state.custom.length){l.innerHTML="<p style='color:var(--pink)'>Zatím nic.</p>";return;}l.innerHTML=state.custom.map((c,i)=>`<div style="padding:.4rem 0;border-bottom:1px solid rgba(212,165,165,.12);display:flex;justify-content:space-between"><span>${c.type==="truth"?"P":"Ú"}: ${c.text.slice(0,50)}${c.text.length>50?"…":""}</span><button style="color:var(--red);background:none;border:none;cursor:pointer" data-d="${i}">×</button></div>`).join("");l.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{state.custom.splice(+b.dataset.d,1);localStorage.setItem("mnCustom",JSON.stringify(state.custom));rC();});}
+$("btnAdd").onclick=()=>{const t=$("cText").value.trim();if(!t)return alert("Napište text.");state.custom.push({id:"c"+Date.now(),type:$("cType").value,text:t,cat:$("cCat").value,int:+$("cInt").value,m:["mix",$("cCat").value]});localStorage.setItem("mnCustom",JSON.stringify(state.custom));$("cText").value="";rC();};
+initC();
+console.log("Položek:",ITEMS.filter(i=>i.type==="truth").length,"pravd,",ITEMS.filter(i=>i.type==="dare").length,"úkolů");
+</script>
+</body>
+</html>
