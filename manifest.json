@@ -1,0 +1,10 @@
+{
+  "name": "Mezi námi",
+  "short_name": "Mezi námi",
+  "description": "Romantická hra Pravda nebo úkol pro dva dospělé",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1a0a0f",
+  "theme_color": "#4a0e1f",
+  "lang": "cs"
+}
